@@ -5,15 +5,9 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
-import android.view.ViewTreeObserver;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -30,6 +24,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_main);
 		getListData();
 		btnin=(Button) findViewById(R.id.button_in);
@@ -42,62 +37,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		btndelete.setOnClickListener(this);	
 		sceneMap = (MyMap) findViewById(R.id.sceneMap);
 		Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-		height2 = b.getHeight();
-		width2 = b.getWidth();
 		sceneMap.setBitmap(b);
-		 ViewTreeObserver vto = sceneMap.getViewTreeObserver();
-		 hasMeasured = false;
-	     vto.addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-	            public boolean onPreDraw(){
-					if (hasMeasured == false){
-
-	                     height = sceneMap.getMeasuredHeight();
-	                     width = sceneMap.getMeasuredWidth();
-	     //获取到宽度和高度后，可用于计算                    
-	                    hasMeasured = true;
-	                }
-	                return true;
-	            }
-	        });
-//		sceneMap.setOnTouchListener(new OnTouchListener() {
-//			
-//			@Override
-//			public boolean onTouch(View v, MotionEvent event) {
-//				 float startx;
-//				float starty;
-//				switch (event.getAction() & MotionEvent.ACTION_MASK) {
-//
-//	              
-//	                case MotionEvent.ACTION_UP:
-//	                case MotionEvent.ACTION_CANCEL:
-//	                    startx = event.getRawX();
-//	                    starty = event.getRawY();
-//	                    
-//	                    //获得最后的坐标
-//	                    float x2 = event.getX();
-//	                    float y2 = event.getY();
-//	                    //获得坐标在图片相对位置的的百分比
-//	                   float rewx= x2/width;
-//	                   float rewy=y2/height;
-//	                   Log.d("yxw", startx+" "+starty+" x y "+x2+" "+y2+" 百分比"+rewx+" "+rewy+"  height+width"+height+width+  " 图片的 "+height2+" "+width2);
-//	             for (int i = 0; i < createList.size(); i++) {
-//	            	 MarkObject markObject = createList.get(i);
-//	            	 markObject.setMapX(rewx);
-//	            	 markObject.setMapY(rewy);
-//	            	
-//	            	 sceneMap.addMark(markObject);
-//	            	 createList.remove(markObject);
-//				}
-//	                   
-//	                   
-//	                   break;
-//	            }
-//	          
-//	            return false;
-//
-//			}
-//		});
-	
 
 	for (int i = 0; i < arrayList.size(); i++) {
 		MarkObject markObject = arrayList.get(i);
@@ -119,9 +59,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	
 	
 	ArrayList<MarkObject> arrayList=new ArrayList<MarkObject>();
-	private int height;
-	private int width;
-	private boolean hasMeasured;
 	public ArrayList<MarkObject> getListData(){
 		
 		MarkObject markObject= new MarkObject();
@@ -148,9 +85,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		return null;
 	}
 	
-	ArrayList<MarkObject> createList=new ArrayList<MarkObject>();
-	private int height2;
-	private int width2;
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -161,21 +95,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			sceneMap.zoomOut();
 			break;
 		case R.id.button_add:
-		
 		 sceneMap.addNewDian();
-//			MarkObject markObject = new MarkObject();
-//			markObject.setmBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.icon_marka));
-//			 markObject.setMarkListener(new MarkClickListener() {
-//
-// 				@Override
-// 				public void onMarkClick(int x, int y) {
-// 					Toast.makeText(MainActivity.this, "点击覆盖物"+x+"  "+y, Toast.LENGTH_SHORT)
-//						.show();
-// 				}
-// 			});
-//			createList.add(markObject);
-//			sceneMap.zoomOut();
-			//sceneMap.addMark(markObject);
 			break;
 		case R.id.button_delete:
 			

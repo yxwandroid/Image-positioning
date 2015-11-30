@@ -470,7 +470,9 @@ public class MyMap extends SurfaceView implements SurfaceHolder.Callback {
 			});
 		
 		createList.add(markObject);
-		this.zoomOut();
+		for (int i = 0; i <20; i++) {
+			this.zoomOut();
+		}
 	}
 	/**
 	 *  获得状态栏高度
